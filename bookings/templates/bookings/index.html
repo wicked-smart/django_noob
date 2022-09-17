@@ -1,0 +1,16 @@
+{% extends "bookings/base.html" %}
+
+{% block title %}
+    welcome page!
+{% endblock %}
+
+{% block body %}
+    <h1>Welome to the booking site :- </h1>
+    {% if flights %}
+        {% for flight in flights %}
+            <li><a href="{% url 'flight' flight.id %}"> {{ flight }}</a></li>
+        {% endfor %}
+    {% else %}
+        <h1>Sorry, no flight available right now...</h1>
+    {% endif %}
+{% endblock %}

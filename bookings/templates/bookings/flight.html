@@ -1,0 +1,46 @@
+{% extends "bookings/base.html" %}
+
+{% block title %}
+    Flight Info Page!
+{% endblock %}
+
+{% block body %}
+
+{% if message %}
+    <h1 style="color: red"> {{ message }}</h1>
+{% else %}
+    <h1>Flight no. {{ flight.id }} </h1>
+    <hr/>
+    <p>Origin:- <strong>{{ flight.origin }}</strong></p>
+    <p>Destination:- <strong>{{ flight.destination }}</strong></p>
+    <p>Duration:- <strong>{{ flight.duration }}</strong></p>
+
+    <br><hr>
+    <h2>Passengers on this Flight:- </h2>
+    {% for passenger in passengers %}
+        <li>{{ passenger.first_name }} {{ passenger.last_name }}</li>
+    {% endfor %}
+
+    <br><hr>
+    <h2>Book Ticket:- </h2>
+    <form  method="post" action="{% url 'book' flight.id  %}">
+        {% csrf_token %}
+        <label for="booking">Choose a passenger:- </label>
+    
+    <select name="passenger" id="booking">
+        {% for passenger in non_passengers %}
+            <option value="{{ passenger.id }}">{{ passenger.first_name }} {{ passenger.last_name }}</option>
+        {% endfor %}
+    </select> 
+    <button>book</button>
+    </form>
+    
+    
+
+{% endif %}
+
+<br><br>
+
+<a href="{% url 'index' %}"> <-- Home Page!</a>
+
+{% endblock %}

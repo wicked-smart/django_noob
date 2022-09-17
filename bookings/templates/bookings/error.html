@@ -1,0 +1,14 @@
+{% extends "booking/base.html" %}
+
+{% block title %}
+    Error page
+{% endblock %}
+
+{% block body %}
+    {% if message %}
+        <h1 style="color: red">{{ message }}</h1>
+    {% endif %}
+
+    <br><hr>
+    <a href="{% url 'index' %}">Home Page</a>
+{% endblock %}
